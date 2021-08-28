@@ -14,7 +14,7 @@ trigger AssetTrigger on Asset (before insert, before update, before delete, afte
             AssetTriggerHelper.onShipmentChange(Trigger.new);
         }
         when AFTER_UPDATE {
-            AssetTriggerHelper.onShipmentChange(Trigger.new, Trigger.old);
+            
         }
         when AFTER_DELETE {
             AssetTriggerHelper.onShipmentChange(Trigger.old);

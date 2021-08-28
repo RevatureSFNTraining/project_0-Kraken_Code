@@ -22,9 +22,4 @@ public class AssetTriggerHelper {
         	}
         } 
     }
-    
-    public static void onShipmentChange(List<Asset> a, List<Asset> b) {
-        
-        
-    }
 }
