@@ -1,0 +1,26 @@
+trigger SpeciesDirectoryTrigger on Species_Directory__c (before insert, before update, before delete, after delete, after undelete, after update, after insert) {
+    switch on trigger.operationType{
+        when BEFORE_INSERT{
+            
+        }
+        when BEFORE_UPDATE{
+            
+        }
+        When BEFORE_DELETE{
+            
+        }
+        when AFTER_INSERT{
+           Integer recordCount = Trigger.New.size();
+           SpeciesDirectoryTriggerHandler.sendMail('fetylerb@gmail.com', 'A New Species Has Been Added', recordCount + ' species was/were inserted.');
+        }
+        when AFTER_UPDATE{
+            
+        }
+        when AFTER_DELETE{
+            
+        }
+        when AFTER_UNDELETE{
+            
+        }
+    }
+}
