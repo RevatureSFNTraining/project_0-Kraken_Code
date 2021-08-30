@@ -1,0 +1,5 @@
+public class IndividualAnimalTriggerHandler {
+    public static void addError(String errorMsg){
+        errorMsg = 'Whoops! You are not allowed to delete Individual Animal records.';
+    } 
+}
