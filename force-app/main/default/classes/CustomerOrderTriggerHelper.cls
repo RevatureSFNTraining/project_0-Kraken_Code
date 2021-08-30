@@ -16,8 +16,8 @@ public class CustomerOrderTriggerHelper {
             }
         }
 
-        if (newOrders.size() > 200 && !getListOfShipmentsLessThan15Days()) {
-            Inventory_Shipment__c newShip = new Inventory_Shipment__c();
+        if (newOrders.size() > 200 && getListOfShipmentsLessThan15Days() == false) {
+            Inventory_Shipment__c newShip = new Inventory_Shipment__c(Depart_Time__c = DateTime.now());
             insert newShip;
         }
     }

@@ -11,16 +11,19 @@ trigger AssetTrigger on Asset (before insert, before update, before delete, afte
             
         }
         when AFTER_INSERT {
-            AssetTriggerHelper.onAssetChange(Trigger.new);
+            AssetTriggerHelper a = new AssetTriggerHelper();
+            a.onAssetChange(Trigger.new);
         }
         when AFTER_UPDATE {
             
         }
         when AFTER_DELETE {
-            AssetTriggerHelper.onAssetChange(Trigger.old);
+            AssetTriggerHelper a = new AssetTriggerHelper();
+            a.onAssetChange(Trigger.new);
         }
         when AFTER_UNDELETE {
-            AssetTriggerHelper.onAssetChange(Trigger.new);
+            AssetTriggerHelper a = new AssetTriggerHelper();
+            a.onAssetChange(Trigger.new);
         }
 
     }

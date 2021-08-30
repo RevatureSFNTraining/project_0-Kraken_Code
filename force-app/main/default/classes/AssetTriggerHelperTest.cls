@@ -1,26 +1,24 @@
 @isTest 
 private class AssetTriggerHelperTest {
 
-    @isTest static void singleTest() {
-        Location__c littleRock = new Location__c(name = 'Little Rock');
-        Asset testAsset = new Asset(name ='truck', Location__r = littleRock);
-        Database.SaveResult sr = Database.insert(testAsset, false);
-        ID assetPassed;
-
-        if (sr.isSuccess()) {
-            assetPassed = sr.getId();
-        } else {
-            for (Database.Error e : sr.getErrors()) {
-                system.debug('An error has occured.');
-                system.debug(e.getStatusCode());
-                system.debug(e.getMessage());
-                system.debug(e.getFields());
-            }
-        }
-        
-        Asset assetEffected = [SELECT name, Location__r.name FROM Asset WHERE ID = :assetPassed];
-        System.assertEquals('truck', assetEffected.name);
-        System.assertEquals('Little Rock', assetEffected.Location__r.name);
+    @TestSetup
+    static void makeData(){
+        Location__c location = new Location__c(Name = 'Location1', Address__c = '233', Location_Phone__c = '4343433');
+        insert location;
     }
-    //test comment to check if this uploads to org properly
+
+    @isTest static void bulkTest() {
+
+        Location__c location = [Select id FROM Location__c WHERE Name = 'Location1'];
+        List<Asset> a = new List<Asset>();
+        for (Integer i = 0; i < 10; i++) {
+            a.add(new Asset(Name = 'asset' + i, Location__r = location));
+        }
+        Messaging.SingleEmailMessage[] m = AssetTriggerHelper.onAssetChange(a);
+        
+        for(Integer j = 0; j < 10; j++) {
+            System.assertEquals('There was an asset change. A asset' + i +  
+            ' record was changed at location: Location1', m[j].message.plainTextBody);
+        }
+    }
 }
