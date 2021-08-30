@@ -1,0 +1,25 @@
+trigger IndividualAnimalTrigger on Individual_Animal__c (before insert, before update, before delete, after delete, after undelete, after update, after insert) {
+    switch on trigger.operationType{
+        when BEFORE_INSERT{
+            
+        }
+        when BEFORE_UPDATE{
+            
+        }
+        When BEFORE_DELETE{
+            IndividualAnimalTriggerHandler.addError(String.valueOf(trigger.new));
+        }
+        when AFTER_INSERT{
+            
+        }
+        when AFTER_UPDATE{
+            
+        }
+        when AFTER_DELETE{
+            
+        }
+        when AFTER_UNDELETE{
+            
+        }
+    }
+}
