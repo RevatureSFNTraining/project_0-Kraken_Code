@@ -1,0 +1,26 @@
+trigger AccountTrigger on Account (before insert, before update, before delete, after delete, after undelete, after update, after insert) {
+    switch on trigger.operationType{
+        when BEFORE_INSERT{
+            
+        }
+        when BEFORE_UPDATE{
+            
+        }
+        When BEFORE_DELETE{
+            
+        }
+        when AFTER_INSERT{
+            AccountTriggerHandler.ConnectAccountsToContacts(trigger.new);
+        }
+        when AFTER_UPDATE{
+            AccountTriggerHandler.ConnectAccountsToContacts(trigger.new);
+        }
+        when AFTER_DELETE{
+            
+        }
+        when AFTER_UNDELETE{
+            
+        }
+    }
+
+}
