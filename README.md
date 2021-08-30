@@ -1,1 +1,1 @@
-## Movie Theater - ERD
+# project_0-Kraken_Code
