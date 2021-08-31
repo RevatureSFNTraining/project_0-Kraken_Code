@@ -7,7 +7,7 @@ public class AccountTriggerHandler {
         for(Account a : acct) {
             System.debug('acctsWithCons.get(a.Id).Contacts.size()=' + acctsWithCons.get(a.Id).Contacts.size());
             if (acctsWithCons.get(a.Id).Contacts.size() == 0) {
-                conList.add(new Contact(FirstName=a.Name + ' Contact',
+                conList.add(new Contact(LastName=a.Name + ' Contact',
                                            AccountId=a.Id));
             }           
         }
