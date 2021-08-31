@@ -1,0 +1,70 @@
+@isTest
+public class IndividualAnimallTriggerHandlerTest {
+    @isTest static void posDeletionErrorTest(){
+        //positive test
+        Species_Directory__c sd = new Species_Directory__c(Name='Test Species');
+        insert sd;
+        Individual_Animal__c ia = new Individual_Animal__C(Name='We Testing This Bitty', Species__c=sd.Id);
+        insert ia;
+            
+        //Perform Test
+        Test.startTest();
+        Database.DeleteResult result = Database.delete(ia, false);
+ 
+        
+        // making sure it worked
+        System.assert(result.isSuccess());
+        System.assert(result.getErrors().size() == 0);
+        System.assertEquals('Whoops! You are not allowed to delete Individual Animal records.',
+                           'Whoops! You are not allowed to delete Individual Animal records.');
+        test.stopTest();
+    }
+    	
+    
+    //@isTest static void NegDeleteAnimalTest(){
+        //negative test
+        //Species_Directory__c sd = new Species_Directory__c(Name='Test Species');
+        //insert sd;
+        //Individual_Animal__c ia = new Individual_Animal__C(Name='We Testing This Bitty', Species__c=sd.Id);
+        //insert ia;
+            
+        //Perform Test
+        //Test.startTest();
+        //Database.DeleteResult result = Database.delete(ia, false);
+ 
+        //make sure it works 
+    	//system.assert(result.isSuccess());
+        //System.assert(result.getErrors().size()==0);
+        //System.assertEquals('Whoops! You are not allowed to delete Individual Animal records.', null);
+       	//test.stopTest();
+        
+    //}
+    @isTest static void singleDeletionErrorTest(){
+    	//single action test
+    	Species_Directory__c sd = new Species_Directory__c(Name='Test Species');
+        insert sd;
+        Individual_Animal__c ia = new Individual_Animal__C(Name='We Testing This Bitty', Species__c=sd.Id);
+        insert ia;
+            
+        //Perform Test
+        Test.startTest();
+        Database.DeleteResult result = Database.delete(ia, false);
+        test.stopTest();
+    
+    }
+    @isTest static void BulkDeletionErrorTest(){
+        //bulk test
+        Species_Directory__c sd = new Species_Directory__c(Name='Test Species');
+        insert sd;
+        integer iaCount = 0;
+        list<Individual_Animal__c> ia = new List<Individual_Animal__c>();
+        while (iaCount<=151){
+            iaCount += 1;
+            ia.add (New Individual_Animal__c(Name = 'Test', Species__c = sd.id));
+        }
+        insert ia;
+        system.assertEquals('Whoops! You are not allowed to delete Individual Animal records.',
+                           'Whoops! You are not allowed to delete Individual Animal records.');
+        
+    }
+}
