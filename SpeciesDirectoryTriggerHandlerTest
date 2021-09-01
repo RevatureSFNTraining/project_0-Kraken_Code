@@ -1,0 +1,37 @@
+@isTest
+public class SpeciesDirectoryTriggerHandlerTest {
+    @isTest static void PosEmailTest() {
+        //positive test
+        Test.StartTest();
+        SpeciesDirectoryTriggerHandler.sendMail('test@test.com', 'Unit Test X', 'Unit Test');
+        Integer invocations = Limits.getEmailInvocations();
+        Test.stopTest();
+ 
+        System.assertEquals(1, invocations);
+    }
+    
+    @isTest static void SingleEmailTest() {
+        //single action test
+        Test.StartTest();
+        SpeciesDirectoryTriggerHandler.sendMail('test@test.com', 'Unit Test X', 'Unit Test');
+        Integer invocations = Limits.getEmailInvocations();
+        Test.stopTest();
+    
+    }
+    @isTest static void BulkyBittyEmailTest(){
+        //bulk test
+        test.startTest();
+        integer sdCount = 0;
+        list<Species_Directory__c> sd = new List<Species_Directory__c>();
+        while (sdCount <= 1111){
+            sdCount +=1;
+            sd.add(New Species_Directory__c(Name = 'Test Species'));
+        }
+        insert sd;
+        test.stopTest();
+	}
+    
+    @isTest static void NegEmailTest(){
+        //negative test
+    }
+}
