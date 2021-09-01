@@ -48,11 +48,6 @@ public with sharing class TaskHistoryTriggerHandler {
                 history.addError('There seem to be multiple tasks with this name');
             }
         }
-
-        // String s = histories[0].Task_Completed__r.Name;
-        // List<SObject> stuff = [SELECT LastName, Phone FROM Contact WHERE RecordTypeId != NULL ORDER BY LastName LIMIT 200];
-        // List<SObject> stuff2 = [SELECT Name, (SELECT Lastname, Phone FROM Contacts) FROM Account LIMIT 200];
-        // List<SObject> stuff3 = [SELECT id, name, (SELECT id, name FROM Opportunities) FROM Account WHERE Id IN (SELECT Contact.AccountId FROM Contact)];
     }
 
     public static void removeCustomerRelationshipFromTask(List<Task_History__c> histories){
