@@ -44,7 +44,7 @@ public class MovieTriggerHandler {
         
         for(Movie__c newlyInserted: insertedMovies){
             
-            system.debug('newlyInserted movie: ' + newlyInserted);
+      //      system.debug('newlyInserted movie: ' + newlyInserted);
             
          //create an empty list of type Show Time
        	List<Show_Time__c> newShows = new List<Show_Time__c>(); 
@@ -58,12 +58,8 @@ public class MovieTriggerHandler {
             );
                 newShows.add(newPremiere);
             }
-            system.debug(newShows);
-            try{
-                 insert newShows;                      
-            } catch(DmlException e) {
-                system.debug(e);
-            }     
+
+                 insert newShows;                        
         }      
 	}  
     

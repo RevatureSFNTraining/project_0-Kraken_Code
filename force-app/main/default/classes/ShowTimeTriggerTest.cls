@@ -103,5 +103,21 @@ public class ShowTimeTriggerTest {
                                  sr.getErrors()[0].getMessage());
         }
     }
+    /*
+    @isTest 
+    static void testing() {
+         Movie__c mym = new Movie__c(
+        	Name='super cool 1',
+        	Released_Date__c = Date.valueOf('2021-09-14'),
+            Genre__c='Comedy'
+        );
+		 insert mym;
         
+        Test.startTest();
+        List <Movie__c> movies = [SELECT id,(SELECT id, Movie__c, Start_Time__c, Theater__c from Show_Times__r) FROM Movie__c];
+        system.debug('in test         ' + movies);
+        Test.stopTest();
+        system.debug('out test         ' + movies);
+    }
+    */    
 }
