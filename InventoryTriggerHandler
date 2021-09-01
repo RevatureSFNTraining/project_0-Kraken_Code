@@ -1,0 +1,22 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			InventoryTriggerHandler
+//	Author: 		Matthew Kim
+//	Date Created:	8/31/21
+//	Date Modified:
+//	Description:	Trigger to ensure the item is used before it is deleted from the inventory
+//	
+/////////////////////////////////////////////////////////////////////	
+
+public class InventoryTriggerHandler {
+    
+    public static void itemUsed(List<Inventory__c> deleteInv){
+        
+        for(Inventory__c i:deleteInv){
+            if (i.Used__c != true){
+                i.addError('Item still available unable to delete.');
+            }
+        }
+    }
+        
+}
