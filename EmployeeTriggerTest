@@ -1,0 +1,28 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 		  	EmployeeTriggerTest
+//	Author: 		  Matthew Kim
+//	Date Created:	8/31/21
+//	Date Modified:
+//	Description:	Test for the EmployeeTrigger
+//	
+/////////////////////////////////////////////////////////////////////	
+
+@isTest
+public class EmployeeTriggerTest {
+    
+    
+    @isTest
+    static void testSingle(){
+        Account acc = new Account(Name='a');
+        insert acc;
+        Employee__c emp = new Employee__c(Name='e', account__c=acc.id);
+        insert emp;
+        
+        Employee__c e = [SELECT Salary__c FROM Employee__c WHERE Name='e'];
+        double minSalary = 8*40*52;
+        
+        system.assertEquals(minSalary, e.Salary__c);
+        
+    }
+}
