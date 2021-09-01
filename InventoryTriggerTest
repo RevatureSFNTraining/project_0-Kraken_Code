@@ -1,0 +1,32 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			  InventoryTriggerTest
+//	Author: 		  Matthew Kim
+//	Date Created:	8/31/21
+//	Date Modified:
+//	Description:	Test for the InventoryTrigger
+//	
+/////////////////////////////////////////////////////////////////////	
+
+@isTest
+public class InventoryTriggerTest {
+    
+    @isTest
+    public static void testSingle(){
+        Account acc = new Account(Name='a');
+        insert acc;
+        Supplier__c sup = new Supplier__c(Name='s', account__c=acc.id);
+        insert sup;
+        Employee__c emp = new Employee__c(Name='e', account__c=acc.id);
+        insert emp;
+        Meal__c meal = new Meal__c(Employee__c=emp.id);
+        insert meal;
+        Inventory__c i = new Inventory__c(Name='Single', Supplier__c=sup.id, Meal__c=meal.id, Used__c=false);
+        
+        
+        insert i;
+        Database.deleteResult result = Database.delete(i,false);
+        system.assert(!result.isSuccess());
+        system.assertEquals('Item still available unable to delete.',result.getErrors()[0].getMessage());
+    }
+}
