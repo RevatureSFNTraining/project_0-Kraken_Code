@@ -34,23 +34,34 @@ public class MovieTriggerTest {
     	System.assertEquals('The movie My new Movie already exists',res0.getErrors()[0].getMessage());
         
     }
-	
+	// couldn't figure out how to test the line where i insert records from another object
+    /*
     @isTest
+    
     static void positiveCase() {
-        Movie__c mym = new Movie__c(
+     
+
+       	Test.startTest();
+           Movie__c mym = new Movie__c(
         	Name='super cool',
         	Released_Date__c = Date.valueOf('2021-09-14'),
             Genre__c='Comedy'
         );
-
-       	Test.startTest();
+     
     
     	Database.SaveResult res = Database.insert(mym, true);
+        List<Show_Time__c> shows = [SELECT id, Movie__c from Show_Time__c WHERE Movie__c = :mym.Id];
+        Database.SaveResult[] shoows = Database.insert(shows, true);
+        system.debug('ssss' + shows);
         
     	Test.stopTest();
 
         System.assert(res.isSuccess());
+        for (Database.SaveResult ds: shoows) {
+            system.assert(ds.isSuccess());
+        }
+   
     }
 
-
+*/
 }

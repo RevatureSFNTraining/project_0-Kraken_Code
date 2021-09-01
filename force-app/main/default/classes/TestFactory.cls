@@ -51,7 +51,7 @@ public class TestFactory {
     }
     
     public static Show_Time__c creatingShow() {
-        // creating a movie 
+        	// creating a movie 
             Movie__c myMovie = new Movie__c ();
             	myMovie.Name = 'My new Movie';
             	myMovie.Released_Date__c = Date.today() - 2;
@@ -59,25 +59,18 @@ public class TestFactory {
  
         insert myMovie;
         
-       	// creating a theater
+       		// creating a theater
     		Theater__c ttr = new Theater__c();
                 ttr.Name='theater1';
                 ttr.City__c='loc1';
     		
     	insert ttr; 
-        
-        //creating a show_time
-   //     List<Show_Time__c> newShowTimes = new List<Show_Time__c>();
-   //     for (Integer i=0; i< numShows; i++) {
+     
             Show_Time__c sh = new Show_Time__c();
-            sh.Start_Time__c = Time.newInstance(18, 30, 00, 000);
-     //       if (isSame){        
+            sh.Start_Time__c = Time.newInstance(18, 30, 00, 000);    
                 sh.Movie__c = myMovie.Id;
                 sh.Theater__c = ttr.Id;
-    //        } 
-   //    	newShowTimes.add(sh);
-  //      }
-  //     insert sh;
+
         return sh;
     }
     

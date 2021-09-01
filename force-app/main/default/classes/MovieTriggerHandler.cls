@@ -37,24 +37,18 @@ public class MovieTriggerHandler {
     
     // AFTER INSERT
     public static void insertingShows(List<Movie__c> insertedMovies) {
-        
-        
+              
         //find all the theaters that are available
         List<Theater__c> allTeathers = [SELECT name, id FROM Theater__c];
         
         for(Movie__c newlyInserted: insertedMovies){
-            
-      //      system.debug('newlyInserted movie: ' + newlyInserted);
-            
+   
          //create an empty list of type Show Time
        	List<Show_Time__c> newShows = new List<Show_Time__c>(); 
             
             for (Theater__c t: allTeathers ) {
                 // create a new record of premiere Show_Time for each Teather
-            	Show_Time__c newPremiere = new Show_Time__c(
-                Movie__c=newlyInserted.id,    
-            	Start_Time__c=Time.newInstance(21, 30, 0, 00),
-                Theater__c=t.id           
+            	Show_Time__c newPremiere = new Show_Time__c( Movie__c=newlyInserted.id, Start_Time__c=Time.newInstance(21, 30, 0, 00),  Theater__c=t.id                
             );
                 newShows.add(newPremiere);
             }

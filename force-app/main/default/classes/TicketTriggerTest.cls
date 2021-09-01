@@ -1,14 +1,6 @@
 @isTest
 public class TicketTriggerTest {
     
-  /*  //setup providing 1 ticket by default without reservation
-	@testSetup
-    static void dataCreation(){
- 		List <Ticket__c> tickets = TestFactory.getTicket(1, false);
-        
-        insert tickets[0];
-    }
-  */  
     // TESTING FOR POSITIVE RESULT 1 TICKET
     @isTest
     static void positiveOneTicket() {
@@ -33,19 +25,18 @@ public class TicketTriggerTest {
    
     @isTest 
     static void negativeOneTicket() {
-  //      List<Ticket__c> myList = [SELECT id FROM Ticket__c LIMIT 1];
+
         List<Ticket__c> myList = TestFactory.getTicket(1, false);
         Ticket__c myt = myList[0]; 
         
         Test.startTest();
-        Database.DeleteResult res = Database.delete(myt, true);
-        
+        Database.DeleteResult res = Database.delete(myt, true); 
         Test.stopTest();
         
-         System.assert(res.isSuccess());
+        System.assert(res.isSuccess());
     }
     
-    // BULK FOR MANY POSITIVE 
+    // BULK TEST 
     @isTest
     static void positiveManyTickets(){
         List<Ticket__c> myList = TestFactory.getTicket(200, true);
@@ -60,7 +51,6 @@ public class TicketTriggerTest {
             System.assert(dr.getErrors().size() > 0);
             System.assertEquals('You are not allowed to delete this record. It has a Ticket Reservation assigned to it.',
                                  dr.getErrors()[0].getMessage());
-    }
-    }        
-           
+    	}
+    }          
 }

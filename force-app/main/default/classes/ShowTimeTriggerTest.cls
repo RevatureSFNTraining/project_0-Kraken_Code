@@ -103,9 +103,10 @@ public class ShowTimeTriggerTest {
                                  sr.getErrors()[0].getMessage());
         }
     }
-    /*
+    
     @isTest 
     static void testing() {
+        /*
          Movie__c mym = new Movie__c(
         	Name='super cool 1',
         	Released_Date__c = Date.valueOf('2021-09-14'),
@@ -118,6 +119,15 @@ public class ShowTimeTriggerTest {
         system.debug('in test         ' + movies);
         Test.stopTest();
         system.debug('out test         ' + movies);
+*/
+        TestFactory.getTicket(1, false);
+        
+        List<Movie__c> shows = [SELECT id from Movie__c];
+        system.debug('aaaaaaaa ' + shows);
+        
+        Test.startTest();
+        
+        Test.stopTest();
     }
-    */    
+        
 }
