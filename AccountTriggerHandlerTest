@@ -1,0 +1,39 @@
+@isTest
+public class AccountTriggerHandlerTest{
+    @isTest static void SingleAccConTest(){
+        //make acct obj / insert
+        //single action test
+        test.startTest();
+		Account acct = new Account(Name = 'Test Account');
+        insert acct;
+        
+        //query contact obj for acct's fields
+        Account ac = [SELECT Id, (SELECT Id FROM Contacts) FROM Account];
+        test.stopTest();
+        //if found, = single test
+        //if found + system. asserts -- positive test
+    }
+	
+    @isTest static void PosAccConTest(){
+        //positive test
+        test.startTest();
+		Account acct = new Account(Name = 'Test Account');
+		        
+		//[SELECT Id, (SELECT Id FROM Contacts) FROM Account];
+        system.assert(Database.insert(acct).isSuccess());
+
+        test.stopTest();		        
+    }
+    @isTest static void BulkAccConTest(){
+        //bulk test
+        test.startTest();
+        integer acCount = 0;
+        list<Account> ac = new List<Account>();
+        while (acCount<=151){
+            acCount +=1;
+            ac.add(New Account(Name = 'Test Account'));
+        }
+        insert ac;
+        test.StopTest();
+    }    
+}
