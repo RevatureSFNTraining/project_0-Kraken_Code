@@ -1,0 +1,22 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			MealTriggerHandler
+//	Author: 		Matthew Kim
+//	Date Created:	8/31/21
+//	Date Modified:
+//	Description:	Trigger to create a bill when a meal is made
+//	
+/////////////////////////////////////////////////////////////////////	
+
+public class MealTriggerHandler {
+    
+    public static void createBill(List<Meal__c> meals){
+        
+        List<Bill__c> newBill = new List<Bill__c>();
+        for (Meal__c m:meals){
+            newBill.add(new Bill__c(Meal__c=m.id, Customer__c=m.Customer__r.id, Total__c=m.Cost__c));
+        }
+        insert newBill;
+    }
+
+}
