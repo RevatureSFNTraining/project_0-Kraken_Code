@@ -9,6 +9,7 @@
         }
         List<Database.SaveResult> srList = Database.insert(e, false);
        	Integer numFailed = 0;
+           
         for (Database.SaveResult sr : srList) {
             if (!sr.isSuccess()) {
                 numFailed += 1;

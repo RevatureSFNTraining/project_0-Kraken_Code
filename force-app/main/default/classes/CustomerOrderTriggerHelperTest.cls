@@ -12,7 +12,6 @@
         
         System.assertEquals(25.00, newOrder.Order_Price__c);
     }
-   
     
     @isTest static void bulkTest() {
         
