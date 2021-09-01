@@ -1,0 +1,23 @@
+///////////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			EmployeeTriggerHandler
+//	Author: 		Matthew Kim
+//	Date Created:	8/29/21
+//	Date Modified:
+//	Description:	Trigger handler to ensure every employee has a minsalary if one is not inputted
+//	
+///////////////////////////////////////////////////////////////////////////
+
+public class EmployeeTriggerHandler {
+
+    public static double minWage = 8;
+    public static double minSalary = minWage*40*52;
+    
+    public static void employeeSalary(List<Employee__c> newEmployees){
+        for (Employee__c e : newEmployees){
+            if (e.Salary__c == null){
+                e.Salary__c = minSalary; 
+            }
+        }
+    }
+}
