@@ -1,0 +1,29 @@
+@isTest 
+private class AssetTriggerHelperTest {
+
+    @TestSetup
+    static void makeData(){
+        Location__c location = new Location__c(Name = 'Location1', Address__c = '233 gfsg', Location_Phone__c = '18703709856');
+        insert location;
+    }
+
+    @isTest static void bulkTest() {
+
+        Location__c location = [Select id FROM Location__c WHERE Name = 'Location1'];
+        List<Asset> a = new List<Asset>();
+        for (Integer i = 0; i < 3; i++) {
+            a.add(new Asset(Name = 'asset' + i, Location__r = location));
+        }
+        
+        List<Database.SaveResult> srList = Database.insert(a, false);
+        List<Asset> listEffectedAssets = new List<Asset>();
+        for (Database.SaveResult sr : srList) {
+            listEffectedAssets.add(sr.getId());
+        }
+        List<Asset> listAssetInfo = [SELECT name, Location__r FROM Asset];
+
+        for (Asset asst : listAssetInfo) {
+            System.assertEquals(location, asst.Location__r);
+        }
+    }
+}

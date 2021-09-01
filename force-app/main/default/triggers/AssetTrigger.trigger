@@ -1,30 +1,25 @@
 trigger AssetTrigger on Asset (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
-    switch on Trigger.operationType {
-        when BEFORE_INSERT {
+    Switch on Trigger.OperationType {
+        When BEFORE_INSERT {
+			AssetTriggerHelper.checkAssetLimit(Trigger.New);
+        }
+        When BEFORE_UPDATE {
             
         }
-        when BEFORE_UPDATE {
+        When BEFORE_DELETE {
             
         }
-
-        when BEFORE_DELETE {
+        When AFTER_INSERT {
+          
+        }
+        When AFTER_UPDATE {
             
         }
-        when AFTER_INSERT {
-            AssetTriggerHelper a = new AssetTriggerHelper();
-            a.onAssetChange(Trigger.new);
-        }
-        when AFTER_UPDATE {
+        When AFTER_DELETE {
             
         }
-        when AFTER_DELETE {
-            AssetTriggerHelper a = new AssetTriggerHelper();
-            a.onAssetChange(Trigger.new);
+        When AFTER_UNDELETE {
+            
         }
-        when AFTER_UNDELETE {
-            AssetTriggerHelper a = new AssetTriggerHelper();
-            a.onAssetChange(Trigger.new);
-        }
-
     }
 }

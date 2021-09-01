@@ -1,23 +1,38 @@
-@isTest
-public class CustomerOrderTriggerHelperTest {
+@isTest public class CustomerOrderTriggerHelperTest {
 
-    @isTest static void bulkTest() {
-
-        Location__c loc = new Location__c(name = 'Little Rock Pizza', Address__c = '123', Location_Phone__c = '1234567891');
-        Contact c = new Contact(firstName = 'Ethan', lastName = 'Wilson');
-        insert loc;
+    @isTest static void singleTest() {
+        Contact c = new Contact(firstName = 'Ethan', lastName='Wilson');
+        Location__c loc = new Location__c(Address__c = '4343', Location_Phone__c = '4564565');
         insert c;
-        List<Customer_Order__c> coList = new List<Customer_Order__c>();
-
-        for (Integer i = 0; i < 300; i++) {
-            coList.add(new Customer_Order__c(Contact__r = c, Location__r = loc, Order_Price__c = 10, Order_Items__c = 'large cheese', Order_Date_Time__c = DateTime.now()));
-        }
+        insert loc;
+        Customer_Order__c co = new Customer_Order__c(Order_Price__c = 30.00, Location__c = loc.id, Contact__c = c.id, Order_Date_Time__c = DateTime.now(), Order_Items__c = 'large cheese');
+        insert co;
         
-        CustomerOrderTriggerHelper coth = new CustomerOrderTriggerHelper();
-        Test.startTest();
-        Insert coList;
-        Test.stopTest();
-        Inventory_Shipment__c is = [SELECT id FROM Inventory_Shipment__c WHERE Depart_Time__c = TODAY];
-        System.assertEquals(Datetime.now(), is.Depart_Time__c);
+        Customer_Order__c newOrder = [SELECT id, Order_Price__c FROM Customer_Order__c ORDER BY createddate DESC limit 1];
+        
+        System.assertEquals(25.00, newOrder.Order_Price__c);
+    }
+   
+    
+    @isTest static void bulkTest() {
+        
+        Contact c = new Contact(firstName = 'Ethan', lastName='Wilson');
+        Location__c loc = new Location__c(Address__c = '4343', Location_Phone__c = '4564565');
+        insert c;
+        insert loc; 
+        List<Customer_Order__c> coList = new List<Customer_Order__c>();
+        for (Integer i = 0; i < 150; i++) {
+           coList.add(new Customer_Order__c(Order_Price__c = i, Location__c = loc.id, Contact__c = c.id, Order_Date_Time__c = DateTime.now(), Order_Items__c = 'large cheese')); 
+        }
+        insert coList;
+        
+        List<Customer_Order__c> newOrdersList = [SELECT id, Order_Price__c FROM Customer_Order__c];
+        Integer numDiscount = 0;
+        for (Customer_Order__c custOrder : newOrdersList) {
+            if (custOrder.Order_Price__c >= 25) {
+                numdiscount += 1;
+            } 
+        }
+        System.assertEquals(125, numDiscount);
     }
 }

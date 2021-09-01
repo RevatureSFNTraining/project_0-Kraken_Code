@@ -1,20 +1,19 @@
 @isTest public class EmployeeTriggerHelperTest {
-    
-    @isTest static void BulkTest() {
 
-        Location__c loc = new Location__c(name = 'Little Rock Pizza', Address__c = '123', Location_Phone__c = '1234567891');
+    @isTest static void singleBulkTest() {
+        
         List<Employee__c> e = new List<Employee__c>();
-        for (Integer i; i < 52; i++) {
-            e.add(new Employee__c(name = 'name' + i, Employee_Phone__c = '34343', Employee_Email__c = 'email' + i + '@email.com', Location__r = loc));
+        
+        for (Integer i = 0; i < 300; i++){
+            e.add(new Employee__c(name = 'name' + 1, Employee_Phone__c = '4343434', Employee_Email__c = 'fake' + i + '@mail.com'));
         }
-        EmployeeTriggerHelper.checkNoEmployees(e);
-        List<Database.SaveResult> sr = Database.insert(e, false);
-        for (Database.SaveResult s : sr) {
-            List<Database.Error> errors = s.getErrors();
-            for (Database.Error error : errors) {
-                System.assertEquals('Can not add more than 25 employees to one store!', error.getMessage());
+        List<Database.SaveResult> srList = Database.insert(e, false);
+       	Integer numFailed = 0;
+        for (Database.SaveResult sr : srList) {
+            if (!sr.isSuccess()) {
+                numFailed += 1;
             }
         }
-        
+        System.assertEquals(100, numFailed);
     }
 }

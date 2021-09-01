@@ -1,25 +1,20 @@
-@isTest private class EmployeeTriggerTest {
+@isTest public class EmployeeTriggerTest {
 
-    @isTest static void singleTest() {
-        
-        Employee__c newEmp = new Employee__c();
-        Database.SaveResult sr = Database.insert(newEmp , false);
-        System.assert(true, sr.isSuccess());
-    }
     
-    @isTest static void bulkTest() {
+    @isTest static void singleBulkTest() {
         
-        List<Employee__c> newEmpList = new List<Employee__c>();
-        for (Integer i = 0; i < 150; i++) {
-            newEmplist.add(new Employee__c(name='name' + i));
+        List<Employee__c> e = new List<Employee__c>();
+        
+        for (Integer i = 0; i < 300; i++){
+            e.add(new Employee__c(name = 'name' + 1, Employee_Phone__c = '4343434', Employee_Email__c = 'fake' + i + '@mail.com'));
         }
-        List<Database.SaveResult> srList = Database.insert(newEmpList , false);
-        Integer numberPassed = 0;
+        List<Database.SaveResult> srList = Database.insert(e, false);
+       	Integer numFailed = 0;
         for (Database.SaveResult sr : srList) {
-            if (sr.isSuccess()) {
-                numberPassed++;
+            if (!sr.isSuccess()) {
+                numFailed += 1;
             }
         }
-        System.assertEquals(150, numberPassed);
+        System.assertEquals(100, numFailed);
     }
 }

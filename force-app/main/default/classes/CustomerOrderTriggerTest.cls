@@ -1,14 +1,16 @@
-@isTest 
-private class CustomerOrderTriggerTest {
-
-    @isTest static void singleTest () {
-
-        Location__c loc = new Location__c(name = 'Little Rock Pizza', Address__c = '3434', Location_Phone__c = '4545454');
-        Contact c = new Contact(firstName = 'Ethan', lastName = 'Wilson');
-        Customer_Order__c custOrder = new Customer_Order__c(Contact__r = c, Location__r = loc, Order_Price__c = 10, Order_Items__c = 'large cheese');
-        Database.SaveResult sr = Database.insert(custOrder, false);
-         System.debug(sr);      
+@isTest public class CustomerOrderTriggerTest {
+	
+    @isTest static void singleDiscountTest() {
         
-        System.assertEquals(true, sr.isSuccess());
+        Contact c = new Contact(firstName = 'Ethan', lastName='Wilson');
+        Location__c loc = new Location__c(Address__c = '4343', Location_Phone__c = '4564565');
+        insert c;
+        insert loc;
+        Customer_Order__c co = new Customer_Order__c(Order_Price__c = 30.00, Location__c = loc.id, Contact__c = c.id, Order_Date_Time__c = DateTime.now(), Order_Items__c = 'large cheese');
+        insert co;
+        
+        Customer_Order__c newOrder = [SELECT id, Order_Price__c FROM Customer_Order__c ORDER BY createddate DESC limit 1];
+        
+        System.assertEquals(25.00, newOrder.Order_Price__c);
     }
 }
