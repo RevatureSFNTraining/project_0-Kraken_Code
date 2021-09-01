@@ -10,7 +10,7 @@ trigger CustomerOrderTrigger on Customer_Order__c (before insert, before update,
             
         }
         When AFTER_INSERT {
-            CustomerOrderTriggerHelper.discount();
+            CustomerOrderTriggerHelper.checkAutoShip();
         }
         When AFTER_UPDATE {
             
