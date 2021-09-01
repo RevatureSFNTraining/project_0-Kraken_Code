@@ -1,0 +1,27 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			  EmployeeTrigger
+//	Author: 	  	Matthew Kim
+//	Date Created:	8/29/21
+//	Date Modified:
+//	Description:	Trigger to ensure every employee has a salary
+//	
+/////////////////////////////////////////////////////////////////////	
+
+
+
+trigger EmployeeTrigger on Employee__c (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
+
+    switch on Trigger.OperationType{
+        when BEFORE_INSERT{
+            EmployeeTriggerHandler.employeeSalary(Trigger.New);
+        }
+        when BEFORE_UPDATE{}
+        when BEFORE_DELETE{}
+        when AFTER_INSERT{}
+        when AFTER_UPDATE{}
+        when AFTER_DELETE{}
+        when AFTER_UNDELETE{}
+    	when else{}
+    }
+}
