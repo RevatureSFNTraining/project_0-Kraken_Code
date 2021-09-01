@@ -1,7 +1,7 @@
 trigger AssetTrigger on Asset (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
     Switch on Trigger.OperationType {
         When BEFORE_INSERT {
-			AssetTriggerHelper.checkAssetLimit(Trigger.New);
+			
         }
         When BEFORE_UPDATE {
             
@@ -10,16 +10,16 @@ trigger AssetTrigger on Asset (before insert, before update, before delete, afte
             
         }
         When AFTER_INSERT {
-          
+            AssetTriggerHelper.onAssetChange(Trigger.New);
         }
         When AFTER_UPDATE {
             
         }
         When AFTER_DELETE {
-            
+            AssetTriggerHelper.onAssetChange(Trigger.Old);
         }
         When AFTER_UNDELETE {
-            
+            AssetTriggerHelper.onAssetChange(Trigger.New);
         }
     }
 }
