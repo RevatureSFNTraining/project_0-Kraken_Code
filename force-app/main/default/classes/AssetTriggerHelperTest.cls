@@ -22,4 +22,40 @@
         }
         System.assertEquals(3, numPassed);
     }
+
+    @isTest static void singlePositiveTest() {
+
+        Location__c location = [SELECT id FROM Location__c WHERE Name = 'Location1'];
+        Asset a = new Asset(Name = 'asset', Location__c = location.id);
+        
+        Database.SaveResult sr = Database.insert(a, false);
+        System.assertEquals(true, sr.isSuccess());
+    }
+
+    @isTest static void singleNegativeTest() {
+
+        Asset a = new Asset(Name = 'asset');
+        
+        Database.SaveResult sr = Database.insert(a, false);
+        System.assertEquals(false, sr.isSuccess());
+    }
+
+    @isTest static void singlePositiveDeleteTest() {
+
+        Location__c location = [SELECT id FROM Location__c WHERE Name = 'Location1'];
+        Asset a = new Asset(Name = 'asset', Location__c = location.id);
+        insert a;
+        Database.DeleteResult sr = Database.delete(a, false);
+        System.assertEquals(true , sr.isSuccess());
+    }
+
+    @isTest static void singlePositiveUndeleteTest() {
+
+        Location__c location = [SELECT id FROM Location__c WHERE Name = 'Location1'];
+        Asset a = new Asset(Name = 'asset', Location__c = location.id);
+        insert a;
+        delete a;
+        Database.UndeleteResult sr = Database.undelete(a, false);
+        System.assertEquals(true , sr.isSuccess());
+    }
 }
