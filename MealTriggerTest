@@ -1,0 +1,34 @@
+/////////////////////////////////////////////////////////////////////
+//	
+//	Name: 			  MealTriggerTest
+//	Author: 		  Matthew Kim
+//	Date Created:	8/31/21
+//	Date Modified:
+//	Description:	Test for the MealTrigger
+//	
+/////////////////////////////////////////////////////////////////////	
+
+@isTest
+public class MealTriggerTest {
+    
+    @isTest
+    public static void singleTest(){
+        Account tAcc = new Account(Name='TAcc');
+        insert tAcc;
+        Employee__c tEmp = new Employee__c(Name='TEmp', Account__c=tAcc.Id);
+        insert tEmp;
+        Customer__c tCust = new Customer__c(Name='TCust', Account__c=tAcc.Id);
+        insert tCust;
+        Food_Order__c tOrd = new Food_Order__c(Name='TOrd', Customer__c=tEmp.Id);
+        insert tOrd;
+        Meal__c tMeal = new Meal__c(Customer__c=tCust.id, Employee__c=tEmp.id, Food_Order__c=tOrd.id);
+        insert tMeal;
+        
+        Bill__c tBill=[SELECT Meal__c FROM Bill__c WHERE Meal__c=:tMeal.id LIMIT 1];
+        
+        if (tBill.Meal__c == tMeal.id){
+            system.assert(true);
+        }
+    }
+    
+}
