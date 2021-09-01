@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+//
+// Name: CustomerOrderTriggerHelper
+// Author: Ethan Wilson
+// Created: Sept 2021
+// Updated: Sept 2021
+// Description: determines when to send a truck shipment based on customer orders and recent deliveries
+//
+///////////////////////////////////////////////////////////////
+
 public class CustomerOrderTriggerHelper {
 	
     static long today = DateTime.now().getTime();

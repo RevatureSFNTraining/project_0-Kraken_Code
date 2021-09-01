@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+//
+// Name: AssetTriggerHelper
+// Author: Ethan Wilson
+// Created: Sept 2021
+// Updated: Sept 2021
+// Description: sends an email to manager whenever an asset is changed
+//
+///////////////////////////////////////////////////////////////
+
 public class AssetTriggerHelper {
 
     public static void onAssetChange(List<Asset> a) {

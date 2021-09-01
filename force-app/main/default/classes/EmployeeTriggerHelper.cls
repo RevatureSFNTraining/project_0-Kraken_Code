@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+//
+// Name: EmployeeTriggerHelper
+// Author: Ethan Wilson
+// Created: Sept 2021
+// Updated: Sept 2021
+// Description: limits employee creation to 200, company wide
+//
+///////////////////////////////////////////////////////////////
+
 public class EmployeeTriggerHelper {
     
     
