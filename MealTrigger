@@ -1,0 +1,29 @@
+/////////////////////////////////////////////////////////////////////
+//  
+//  Name:           MealTrigger
+//  Author:         Matthew Kim
+//  Date Created:   8/31/21
+//  Date Modified:
+//  Description:    Trigger to create a bill when a meal is made
+//  
+/////////////////////////////////////////////////////////////////////   
+
+
+
+trigger MealTrigger on Meal__c (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
+
+
+    switch on Trigger.OperationType{
+        when BEFORE_INSERT{}
+        when BEFORE_UPDATE{}
+        when BEFORE_DELETE{}
+        when AFTER_INSERT{
+            MealTriggerHandler.createBill(Trigger.New);
+        }
+        when AFTER_UPDATE{}
+        when AFTER_DELETE{}
+        when AFTER_UNDELETE{}
+        when else{}
+    }
+
+}
