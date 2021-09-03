@@ -15,7 +15,7 @@
         List<Employee__c> e = new List<Employee__c>();
         
         for (Integer i = 0; i < 300; i++){
-            e.add(new Employee__c(name = 'name' + 1, Employee_Phone__c = '4343434', Employee_Email__c = 'fake' + i + '@mail.com'));
+            e.add(new Employee__c(name = 'Name Name', Employee_Phone__c = '5555555555', Employee_Email__c = 'fake' + i + '@mail.com'));
         }
         List<Database.SaveResult> srList = Database.insert(e, false);
        	Integer numFailed = 0;
